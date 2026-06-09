@@ -1,0 +1,28 @@
+name: Update Zoho CRM Leads
+
+on:
+  schedule:
+    - cron: '30 3 * * *'  # Every day 9:00 AM IST
+  workflow_dispatch:        # Manual run button
+
+jobs:
+  update-leads:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install libraries
+        run: pip install requests
+
+      - name: Run Lead Update Script
+        env:
+          ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          ZOHO_REFRESH_TOKEN: ${{ secrets.ZOHO_REFRESH_TOKEN }}
+        run: python update_leads.py
