@@ -10,7 +10,7 @@ RM_TEMPLATE_NAME = "prm_plant_protein_09062026"
 API_BATCH_SIZE = 100  # Zoho max per API call
 
 # Schedule:
-# Today (Mon 9 June) 5:15 PM IST  → 10 leads  (TEST)
+# Today (Tue 9 June) 5:30 PM IST  → 10 leads  (TEST)
 # Wed 11 June 11 AM IST            → 2,000 leads
 # Thu 12 June 11 AM IST            → 2,000 leads
 # Fri 13 June 11 AM IST            → 2,000 leads
@@ -30,7 +30,7 @@ ALL_LEAD_IDS = ["zcrm_530975000004117075", "zcrm_530975000004151008", "zcrm_5309
 # ============================================
 # Format: (date_str, start_idx, end_idx)
 SCHEDULE = [
-    ("2026-06-09", 0,    10),    # 9 June  5:00 PM IST - TEST 10 leads
+    ("2026-06-09", 0,    10),    # 9 June  5:30 PM IST - TEST 10 leads
     ("2026-06-10", 10,   2010),  # 10 June 11:00 AM IST - 2,000 leads
     ("2026-06-11", 2010, 4010),  # 11 June 10:00 AM IST - 2,000 leads
     ("2026-06-12", 4010, 6010),  # 12 June 10:00 AM IST - 2,000 leads
