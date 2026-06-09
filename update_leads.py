@@ -71,7 +71,7 @@ def update_leads(token, lead_ids):
             "data": [
                 {
                     "id": lead_id.replace("zcrm_", ""),
-                    "RM_Template_Name": RM_TEMPLATE_NAME
+                    "RM_Template_Name1": RM_TEMPLATE_NAME
                 }
                 for lead_id in batch
             ]
