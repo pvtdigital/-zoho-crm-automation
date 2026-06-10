@@ -2,11 +2,10 @@ name: Update Zoho CRM Leads
 
 on:
   schedule:
-    - cron: '0 12 9 6 *'    # 9 June 5:30 PM IST (12:00 UTC) - TEST 10 leads
-    - cron: '30 5 10 6 *'    # 10 June 11:00 AM IST (5:30 UTC) - 2000 leads
-    - cron: '30 4 11 6 *'    # 11 June 10:00 AM IST (4:30 UTC) - 2000 leads
-    - cron: '30 4 12 6 *'    # 12 June 10:00 AM IST (4:30 UTC) - 2000 leads
-  workflow_dispatch:           # Manual run button
+    - cron: '25 6 10 6 *'   # 10 June 11:55 AM IST (6:25 UTC) - 2,000 leads
+    - cron: '30 4 11 6 *'   # 11 June 10:00 AM IST (4:30 UTC) - 2,000 leads
+    - cron: '30 4 12 6 *'   # 12 June 10:00 AM IST (4:30 UTC) - 2,000 leads
+  workflow_dispatch:          # Manual run button
 
 jobs:
   update-leads:
