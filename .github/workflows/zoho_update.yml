@@ -1,6 +1,7 @@
 name: Update Zoho CRM Leads
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '25 7 10 6 *'   # 10 June 7:25 UTC - 2,000 leads
     - cron: '30 5 11 6 *'   # 11 June 5:30 UTC - 2,000 leads
