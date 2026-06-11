@@ -3,24 +3,53 @@ name: Update Zoho CRM Leads
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 5 * 6 *'    # Daily in June at 5:30 UTC = 11:00 AM IST
+    - cron: '13 5 * 6 *'   # Attempt 1: 10:43 AM IST
+    - cron: '13 6 * 6 *'   # Attempt 2: 11:43 AM IST
+    - cron: '13 7 * 6 *'   # Attempt 3: 12:43 PM IST
+
+permissions:
+  actions: read
+  contents: read
 
 jobs:
   update-leads:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Skip if already succeeded today
+        id: guard
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          COUNT=$(gh run list \
+            --repo "$GITHUB_REPOSITORY" \
+            --workflow "zoho_update.yml" \
+            --status success \
+            --created "$TODAY" \
+            --json databaseId | jq 'length')
+          echo "✅ Successful runs today: $COUNT"
+          if [ "$COUNT" -gt 0 ]; then
+            echo "Already succeeded today — skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        if: steps.guard.outputs.skip == 'false'
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install libraries
+        if: steps.guard.outputs.skip == 'false'
         run: pip install requests
 
       - name: Run Lead Update Script
+        if: steps.guard.outputs.skip == 'false'
         env:
           ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
           ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
