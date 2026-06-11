@@ -114,7 +114,7 @@ def main():
     print(f"🎯 Template: {RM_TEMPLATE_NAME}")
     print("=" * 45)
 
-    # Get token
+  # Get token
     token = get_access_token()
 
     # Update leads
@@ -123,6 +123,11 @@ def main():
     print(f"\n✅ Done! Updated {total_updated} leads today")
     print(f"📊 Progress: leads {start_idx+1}-{end_idx} out of 9,467")
     print("=" * 45)
+
+    # Fail the run if nothing was updated → allows retry attempt
+    if len(todays_leads) > 0 and total_updated == 0:
+        raise Exception("❌ No leads were updated — marking run as failed so retry can happen")
+
 
 if __name__ == "__main__":
     main()
