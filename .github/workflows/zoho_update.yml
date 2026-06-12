@@ -2,10 +2,7 @@ name: Update Zoho CRM Leads
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '13 5 * 6 *'   # Attempt 1: 10:43 AM IST
-    - cron: '13 6 * 6 *'   # Attempt 2: 11:43 AM IST
-    - cron: '13 7 * 6 *'   # Attempt 3: 12:43 PM IST
+  # schedule removed - Zoho Flow handles scheduling now
 
 permissions:
   actions: read
