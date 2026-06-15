@@ -2,7 +2,7 @@ name: Update Zoho CRM Leads
 
 on:
   workflow_dispatch:
-  # schedule removed - Zoho Flow handles scheduling now
+  # No cron schedule - Zoho Flow handles scheduling via workflow_dispatch trigger
 
 permissions:
   actions: read
@@ -23,7 +23,7 @@ jobs:
           TODAY=$(date -u +%Y-%m-%d)
           COUNT=$(gh run list \
             --repo "$GITHUB_REPOSITORY" \
-            --workflow "zoho_update.yml" \
+            --workflow "zohoupdate.yml" \
             --status success \
             --created "$TODAY" \
             --json databaseId | jq 'length')
