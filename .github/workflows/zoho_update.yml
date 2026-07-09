@@ -1,20 +1,16 @@
 name: Update Zoho CRM Leads
-
 on:
   workflow_dispatch:
   # No cron schedule - Zoho Flow handles scheduling via workflow_dispatch trigger
-
 permissions:
   actions: read
   contents: read
-
 jobs:
   update-leads:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Skip if already succeeded today
         id: guard
         env:
@@ -34,17 +30,14 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
-
       - name: Setup Python
         if: steps.guard.outputs.skip == 'false'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install libraries
         if: steps.guard.outputs.skip == 'false'
         run: pip install requests
-
       - name: Run Lead Update Script
         if: steps.guard.outputs.skip == 'false'
         env:
