@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 # ============================================
 # CONFIGURATION
 # ============================================
-RM_TEMPLATE_NAME = "prm_plant_protein_21072026"
+RM_TEMPLATE_NAME = "prm_plant_protein_21072026_3"
 API_BATCH_SIZE = 100  # Zoho max per API call
 
 # Zoho API Credentials (from GitHub Secrets)
