@@ -19,7 +19,7 @@ jobs:
           TODAY=$(date -u +%Y-%m-%d)
           COUNT=$(gh run list \
             --repo "$GITHUB_REPOSITORY" \
-            --workflow "zoho_update.yml" \
+            --workflow "zohoupdate.yml" \
             --status success \
             --created "$TODAY" \
             --json databaseId | jq 'length')
