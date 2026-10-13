@@ -11,35 +11,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Skip if already succeeded today
-        id: guard
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          TODAY=$(date -u +%Y-%m-%d)
-          COUNT=$(gh run list \
-            --repo "$GITHUB_REPOSITORY" \
-            --workflow "zohoupdate.yml" \
-            --status success \
-            --created "$TODAY" \
-            --json databaseId | jq 'length')
-          echo "✅ Successful runs today: $COUNT"
-          if [ "$COUNT" -gt 0 ]; then
-            echo "Already succeeded today — skipping."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
       - name: Setup Python
-        if: steps.guard.outputs.skip == 'false'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Install libraries
-        if: steps.guard.outputs.skip == 'false'
         run: pip install requests
       - name: Run Lead Update Script
-        if: steps.guard.outputs.skip == 'false'
         env:
           ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
           ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
