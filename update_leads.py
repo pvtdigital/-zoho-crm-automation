@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 # ============================================
 # CONFIGURATION
 # ============================================
-RM_TEMPLATE_NAME = "prm_cmpl_expo_delhi_reminder_17102026"
+RM_TEMPLATE_NAME = "prm_diwali_new_brand_03112026"
 API_BATCH_SIZE = 100  # Zoho max per API call
 
 # Zoho API Credentials (from GitHub Secrets)
@@ -25,7 +25,7 @@ ALL_LEAD_IDS = ['zcrm_530975000000649099', 'zcrm_530975000000649100', 'zcrm_5309
 # Triggered by Zoho Flow via workflow_dispatch
 # All 3942 leads scheduled for today - not divided into batches
 SCHEDULE = [
-    ("2026-10-17", 0,    3942),    # 17 October 2026 - all 3942 leads
+    ("2026-11-04", 0,    3942),    # 04 November 2026 - all 3942 leads
 ]
 
 # ============================================
